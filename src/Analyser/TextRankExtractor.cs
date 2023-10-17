@@ -31,7 +31,7 @@ namespace JiebaNet.Analyser
 
             Segmenter = new JiebaSegmenter();
             PosSegmenter = new PosSegmenter(Segmenter);
-            SetStopWords(ConfigManager.StopWordsFile);
+            SetStopWords(ConfigManager.OpenStopWordsFile());
             if (StopWords.IsEmpty())
             {
                 StopWords.UnionWith(DefaultStopWords);

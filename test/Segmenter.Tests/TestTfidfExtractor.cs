@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using JiebaNet.Analyser;
 using NUnit.Framework;
@@ -42,7 +42,7 @@ namespace JiebaNet.Segmenter.Tests
         {
             var tfidf = new TfidfExtractor();
             // Use less stopwords than default stopword list.
-            tfidf.SetStopWords(TestHelper.GetResourceFilePath("stop_words_test.txt"));
+            tfidf.SetStopWords(File.OpenRead(TestHelper.GetResourceFilePath("stop_words_test.txt")));
             var text = GetFileContents(TestHelper.GetResourceFilePath("article.txt"));
             var result = tfidf.ExtractTags(text, 30);
             foreach (var tag in result)

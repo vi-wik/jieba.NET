@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Configuration;
 using System.IO;
 using JiebaNet.Segmenter.Common;
@@ -29,43 +29,24 @@ namespace JiebaNet.Segmenter
             set { _configFileBaseDir = value; }
         }
 
-        public static string MainDictFile
-        {
-            get { return Path.Combine(ConfigFileBaseDir, "dict.txt"); }
-        }
+        public static Stream OpenMainDictFile() => OpenFile("dict.txt");
 
-        public static string ProbTransFile
-        {
-            get { return Path.Combine(ConfigFileBaseDir, "prob_trans.json"); }
-        }
+        public static Stream OpenProbTransFile() => OpenFile("prob_trans.json");
 
-        public static string ProbEmitFile
-        {
-            get { return Path.Combine(ConfigFileBaseDir, "prob_emit.json"); }
-        }
+        public static Stream OpenProbEmitFile() => OpenFile("prob_emit.json");
 
-        public static string PosProbStartFile
-        {
-            get { return Path.Combine(ConfigFileBaseDir, "pos_prob_start.json"); }
-        }
+        public static Stream OpenPosProbStartFile() => OpenFile("pos_prob_start.json");
 
-        public static string PosProbTransFile
-        {
-            get { return Path.Combine(ConfigFileBaseDir, "pos_prob_trans.json"); }
-        }
+        public static Stream OpenPosProbTransFile() => OpenFile("pos_prob_trans.json");
 
-        public static string PosProbEmitFile
-        {
-            get { return Path.Combine(ConfigFileBaseDir, "pos_prob_emit.json"); }
-        }
+        public static Stream OpenPosProbEmitFile() => OpenFile("pos_prob_emit.json");
 
-        public static string CharStateTabFile
-        {
-            get { return Path.Combine(ConfigFileBaseDir, "char_state_tab.json"); }
-        }
+        public static Stream OpenCharStateTabFile() => OpenFile("char_state_tab.json");
 
-        public static string IdfFile => Path.Combine(ConfigFileBaseDir, "idf.txt");
+        public static Stream OpenIdfFile() => OpenFile("idf.txt");
 
-        public static string StopWordsFile => Path.Combine(ConfigFileBaseDir, "stopwords.txt");
+        public static Stream OpenStopWordsFile() => OpenFile("stopwords.txt");
+
+        private static Stream OpenFile(string name) => File.OpenRead(Path.Combine(ConfigFileBaseDir, name));
     }
 }

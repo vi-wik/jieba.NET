@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
+using JiebaNet.Segmenter.Common;
 
 namespace JiebaNet.Analyser
 {
@@ -14,14 +15,13 @@ namespace JiebaNet.Analyser
 
         protected virtual ISet<string> StopWords { get; set; }
 
-        public void SetStopWords(string stopWordsFile)
+        public void SetStopWords(Stream stopWordsStream)
         {
             StopWords = new HashSet<string>();
 
-            var path = Path.GetFullPath(stopWordsFile);
-            if (File.Exists(path))
+            if (stopWordsStream != null)
             {
-                var lines = File.ReadAllLines(path);
+                var lines = stopWordsStream.ReadAllLinesThenDispose();
                 foreach (var line in lines)
                 {
                     StopWords.Add(line.Trim());

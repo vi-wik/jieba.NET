@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using JiebaNet.Segmenter;
@@ -9,7 +9,6 @@ namespace JiebaNet.Analyser
 {
     public class TfidfExtractor : KeywordExtractor
     {
-        private static readonly string DefaultIdfFile = ConfigManager.IdfFile;
         private static readonly int DefaultWordCount = 20;
 
         private JiebaSegmenter Segmenter { get; set; }
@@ -23,21 +22,14 @@ namespace JiebaNet.Analyser
         {
             Segmenter = segmenter.IsNull() ? new JiebaSegmenter() : segmenter;
             PosSegmenter = new PosSegmenter(Segmenter);
-            SetStopWords(ConfigManager.StopWordsFile);
+            SetStopWords(ConfigManager.OpenStopWordsFile());
             if (StopWords.IsEmpty())
             {
                 StopWords.UnionWith(DefaultStopWords);
             }
 
-            Loader = new IdfLoader(DefaultIdfFile);
+            Loader = new IdfLoader(ConfigManager.OpenIdfFile());
 
-            IdfFreq = Loader.IdfFreq;
-            MedianIdf = Loader.MedianIdf;
-        }
-
-        public void SetIdfPath(string idfPath)
-        {
-            Loader.SetNewPath(idfPath);
             IdfFreq = Loader.IdfFreq;
             MedianIdf = Loader.MedianIdf;
         }

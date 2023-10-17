@@ -1,6 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace JiebaNet.Segmenter.Common
@@ -118,6 +120,30 @@ namespace JiebaNet.Segmenter.Common
             var result = from Group g in groups
                          select g.Value;
             return result.Skip(1);
+        }
+
+        public static string ReadAllTextThenDispose(this Stream stream)
+        {
+            using (var sr = new StreamReader(stream, Encoding.UTF8))
+                return sr.ReadToEnd();
+        }
+
+        public static string[] ReadAllLinesThenDispose(this Stream stream)
+        {
+            var lines = new List<string>();
+
+            using (var sr = new StreamReader(stream, Encoding.UTF8))
+            {
+                while (true)
+                {
+                    var line = sr.ReadLine();
+                    if (line == null)
+                        break;
+                    lines.Add(line);
+                }
+            }
+
+            return lines.ToArray();
         }
 
         #endregion

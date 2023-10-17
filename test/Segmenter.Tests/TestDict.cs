@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.IO;
+using JiebaNet.Segmenter.Common;
 using NUnit.Framework;
 
 namespace JiebaNet.Segmenter.Tests
@@ -8,11 +9,10 @@ namespace JiebaNet.Segmenter.Tests
     public class TestDict
     {
         [TestCase]
-        public void TestMainDictPath()
+        public void TestMainDictStream()
         {
-            var mainDict = ConfigManager.MainDictFile;
-            Assert.That(mainDict, Is.Not.Null);
-            Assert.That(File.Exists(mainDict));
+            var mainDict = ConfigManager.OpenMainDictFile().ReadAllTextThenDispose();
+            Assert.That(mainDict, Is.Not.Empty);
         }
 
         [TestCase]
