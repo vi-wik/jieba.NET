@@ -1,34 +1,9 @@
-using System;
-using System.Configuration;
 using System.IO;
-using JiebaNet.Segmenter.Common;
 
 namespace JiebaNet.Segmenter
 {
     public class ConfigManager
     {
-        private static string _configFileBaseDir = null;
-
-        public static string ConfigFileBaseDir
-        {
-            get
-            {
-                if (_configFileBaseDir.IsNull())
-                {
-                    var configFileDir = ConfigurationManager.AppSettings["JiebaConfigFileDir"] ?? "Resources";
-                    if (!Path.IsPathRooted(configFileDir))
-                    {
-                        var domainDir = AppDomain.CurrentDomain.BaseDirectory;
-                        configFileDir = Path.GetFullPath(Path.Combine(domainDir, configFileDir));
-                    }
-                    _configFileBaseDir = configFileDir;
-                }
-
-                return _configFileBaseDir;
-            }
-            set { _configFileBaseDir = value; }
-        }
-
         public static Stream OpenMainDictFile() => OpenFile("dict.txt");
 
         public static Stream OpenProbTransFile() => OpenFile("prob_trans.json");
@@ -47,6 +22,7 @@ namespace JiebaNet.Segmenter
 
         public static Stream OpenStopWordsFile() => OpenFile("stopwords.txt");
 
-        private static Stream OpenFile(string name) => File.OpenRead(Path.Combine(ConfigFileBaseDir, name));
+        private static Stream OpenFile(string name) => 
+            typeof(ConfigManager).Assembly.GetManifestResourceStream($"JiebaNet.Segmenter.Resources.{name}");
     }
 }

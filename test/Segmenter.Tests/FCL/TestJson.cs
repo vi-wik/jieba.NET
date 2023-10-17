@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using JiebaNet.Segmenter.Common;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
@@ -24,8 +25,7 @@ namespace JiebaNet.Segmenter.Tests.FCL
         [TestCase]
         public void TestDeserializeProbStart()
         {
-            var p = TestHelper.GetResourceFilePath("pos_prob_start.json");
-            var jsonContent = File.ReadAllText(p);
+            var jsonContent = ConfigManager.OpenPosProbStartFile().ReadAllTextThenDispose();
             var probs = JsonConvert.DeserializeObject<IDictionary<string, double>>(jsonContent);
             Assert.That(probs, Is.Not.Null);
             Assert.That(probs.Count, Is.EqualTo(256));
@@ -35,8 +35,7 @@ namespace JiebaNet.Segmenter.Tests.FCL
         [TestCase]
         public void TestDeserializeProbTrans()
         {
-            var p = TestHelper.GetResourceFilePath("pos_prob_trans.json");
-            var jsonContent = File.ReadAllText(p);
+            var jsonContent = ConfigManager.OpenPosProbTransFile().ReadAllTextThenDispose();
             var probs = JsonConvert.DeserializeObject<IDictionary<string, IDictionary<string, double>>>(jsonContent);
             Assert.That(probs, Is.Not.Null);
             Assert.That(probs.Count, Is.EqualTo(256));
@@ -47,8 +46,7 @@ namespace JiebaNet.Segmenter.Tests.FCL
         [TestCase]
         public void TestDeserializeProbEmit()
         {
-            var p = TestHelper.GetResourceFilePath("pos_prob_emit.json");
-            var jsonContent = File.ReadAllText(p);
+            var jsonContent = ConfigManager.OpenPosProbEmitFile().ReadAllTextThenDispose();
             var probs = JsonConvert.DeserializeObject<IDictionary<string, IDictionary<char, double>>>(jsonContent);
             Assert.That(probs, Is.Not.Null);
             Assert.That(probs.Count, Is.EqualTo(256));
@@ -59,8 +57,7 @@ namespace JiebaNet.Segmenter.Tests.FCL
         [TestCase]
         public void TestDeserializeCharStateTab()
         {
-            var p = TestHelper.GetResourceFilePath("char_state_tab.json");
-            var jsonContent = File.ReadAllText(p);
+            var jsonContent = ConfigManager.OpenCharStateTabFile().ReadAllTextThenDispose();
             var probs = JsonConvert.DeserializeObject<IDictionary<string, List<string>>>(jsonContent);
             Assert.That(probs, Is.Not.Null);
             Assert.That(probs.Count, Is.EqualTo(6648));

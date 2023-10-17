@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -50,16 +50,16 @@ namespace JiebaNet.Segmenter.Tests.FCL
         [TestCase]
         public void TestReadFilePerf()
         {
-            ReadLines(TestHelper.GetResourceFilePath("dict.txt"));
-            ReadStreamReader(TestHelper.GetResourceFilePath("dict.txt"));
+            ReadLines(ConfigManager.OpenMainDictFile());
+            ReadStreamReader(ConfigManager.OpenMainDictFile());
         }
 
-        private void ReadLines(string filePath)
+        private void ReadLines(Stream stream)
         {
             var stopWatch = new Stopwatch();
             stopWatch.Start();
 
-            var lines = File.ReadAllLines(filePath, Encoding.UTF8);
+            var lines = stream.ReadAllLinesThenDispose();
             foreach (var line in lines)
             {
                 var tokens = line.Split(' ');
@@ -81,12 +81,12 @@ namespace JiebaNet.Segmenter.Tests.FCL
             Console.WriteLine(stopWatch.ElapsedMilliseconds);
         }
 
-        private void ReadStreamReader(string filePath)
+        private void ReadStreamReader(Stream stream)
         {
             var stopWatch = new Stopwatch();
             stopWatch.Start();
 
-            using (var sr = new StreamReader(filePath, Encoding.UTF8))
+            using (var sr = new StreamReader(stream, Encoding.UTF8))
             {
                 string line = null;
                 while ((line = sr.ReadLine()) != null)
