@@ -11,7 +11,7 @@ namespace JiebaNet.Segmenter.Tests
         [TestCase]
         public void TestMainDictStream()
         {
-            var mainDict = ConfigManager.OpenMainDictFile().ReadAllTextThenDispose();
+            var mainDict = ConfigManager.ReadMainDictFile(x =>x.ReadAllText());
             Assert.That(mainDict, Is.Not.Empty);
         }
 

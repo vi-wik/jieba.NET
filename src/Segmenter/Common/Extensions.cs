@@ -122,25 +122,23 @@ namespace JiebaNet.Segmenter.Common
             return result.Skip(1);
         }
 
-        public static string ReadAllTextThenDispose(this Stream stream)
+        public static string ReadAllText(this Stream stream)
         {
-            using (var sr = new StreamReader(stream, Encoding.UTF8))
-                return sr.ReadToEnd();
+            using var sr = new StreamReader(stream, encoding: Encoding.UTF8, detectEncodingFromByteOrderMarks: true, bufferSize: -1, leaveOpen: true);
+            return sr.ReadToEnd();
         }
 
-        public static string[] ReadAllLinesThenDispose(this Stream stream)
+        public static string[] ReadAllLines(this Stream stream)
         {
-            var lines = new List<string>();
+            using var sr = new StreamReader(stream, encoding: Encoding.UTF8, detectEncodingFromByteOrderMarks: true, bufferSize: -1, leaveOpen: true);
 
-            using (var sr = new StreamReader(stream, Encoding.UTF8))
+            var lines = new List<string>();
+            while (true)
             {
-                while (true)
-                {
-                    var line = sr.ReadLine();
-                    if (line == null)
-                        break;
-                    lines.Add(line);
-                }
+                var line = sr.ReadLine();
+                if (line == null)
+                    break;
+                lines.Add(line);
             }
 
             return lines.ToArray();

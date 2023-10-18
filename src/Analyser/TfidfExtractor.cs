@@ -22,13 +22,13 @@ namespace JiebaNet.Analyser
         {
             Segmenter = segmenter.IsNull() ? new JiebaSegmenter() : segmenter;
             PosSegmenter = new PosSegmenter(Segmenter);
-            SetStopWords(ConfigManager.OpenStopWordsFile());
+            ConfigManager.ReadStopWordsFile(x => { SetStopWords(x); return true; });
             if (StopWords.IsEmpty())
             {
                 StopWords.UnionWith(DefaultStopWords);
             }
 
-            Loader = new IdfLoader(ConfigManager.OpenIdfFile());
+            Loader = ConfigManager.ReadIdfFile(stream => new IdfLoader(stream));
 
             IdfFreq = Loader.IdfFreq;
             MedianIdf = Loader.MedianIdf;

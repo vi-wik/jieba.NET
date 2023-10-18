@@ -17,7 +17,7 @@ namespace JiebaNet.Analyser
             MedianIdf = 0.0;
             if (idfStream != null)
             {
-                var lines = idfStream.ReadAllLinesThenDispose();
+                var lines = idfStream.ReadAllLines();
                 IdfFreq = new Dictionary<string, double>();
                 foreach (var line in lines)
                 {

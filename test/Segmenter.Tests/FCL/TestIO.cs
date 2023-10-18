@@ -50,8 +50,8 @@ namespace JiebaNet.Segmenter.Tests.FCL
         [TestCase]
         public void TestReadFilePerf()
         {
-            ReadLines(ConfigManager.OpenMainDictFile());
-            ReadStreamReader(ConfigManager.OpenMainDictFile());
+            ConfigManager.ReadMainDictFile(x => { ReadLines(x); return true; });
+            ConfigManager.ReadMainDictFile(x => { ReadStreamReader(x); return true; });
         }
 
         private void ReadLines(Stream stream)
@@ -59,7 +59,7 @@ namespace JiebaNet.Segmenter.Tests.FCL
             var stopWatch = new Stopwatch();
             stopWatch.Start();
 
-            var lines = stream.ReadAllLinesThenDispose();
+            var lines = stream.ReadAllLines();
             foreach (var line in lines)
             {
                 var tokens = line.Split(' ');

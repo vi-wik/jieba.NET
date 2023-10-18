@@ -25,7 +25,7 @@ namespace JiebaNet.Segmenter.Tests.FCL
         [TestCase]
         public void TestDeserializeProbStart()
         {
-            var jsonContent = ConfigManager.OpenPosProbStartFile().ReadAllTextThenDispose();
+            var jsonContent = ConfigManager.ReadPosProbStartFile(x => x.ReadAllText());
             var probs = JsonConvert.DeserializeObject<IDictionary<string, double>>(jsonContent);
             Assert.That(probs, Is.Not.Null);
             Assert.That(probs.Count, Is.EqualTo(256));
@@ -35,7 +35,7 @@ namespace JiebaNet.Segmenter.Tests.FCL
         [TestCase]
         public void TestDeserializeProbTrans()
         {
-            var jsonContent = ConfigManager.OpenPosProbTransFile().ReadAllTextThenDispose();
+            var jsonContent = ConfigManager.ReadPosProbTransFile(x => x.ReadAllText());
             var probs = JsonConvert.DeserializeObject<IDictionary<string, IDictionary<string, double>>>(jsonContent);
             Assert.That(probs, Is.Not.Null);
             Assert.That(probs.Count, Is.EqualTo(256));
@@ -46,7 +46,7 @@ namespace JiebaNet.Segmenter.Tests.FCL
         [TestCase]
         public void TestDeserializeProbEmit()
         {
-            var jsonContent = ConfigManager.OpenPosProbEmitFile().ReadAllTextThenDispose();
+            var jsonContent = ConfigManager.ReadPosProbEmitFile(x => x.ReadAllText());
             var probs = JsonConvert.DeserializeObject<IDictionary<string, IDictionary<char, double>>>(jsonContent);
             Assert.That(probs, Is.Not.Null);
             Assert.That(probs.Count, Is.EqualTo(256));
@@ -57,7 +57,7 @@ namespace JiebaNet.Segmenter.Tests.FCL
         [TestCase]
         public void TestDeserializeCharStateTab()
         {
-            var jsonContent = ConfigManager.OpenCharStateTabFile().ReadAllTextThenDispose();
+            var jsonContent = ConfigManager.ReadCharStateTabFile(x => x.ReadAllText());
             var probs = JsonConvert.DeserializeObject<IDictionary<string, List<string>>>(jsonContent);
             Assert.That(probs, Is.Not.Null);
             Assert.That(probs.Count, Is.EqualTo(6648));

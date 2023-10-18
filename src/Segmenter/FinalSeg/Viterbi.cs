@@ -75,10 +75,10 @@ namespace JiebaNet.Segmenter.FinalSeg
                 {'S', -1.4652633398537678}
             };
 
-            var transJson = ConfigManager.OpenProbTransFile().ReadAllTextThenDispose();
+            var transJson = ConfigManager.ReadProbTransFile(x => x.ReadAllText());
             _transProbs = JsonConvert.DeserializeObject<IDictionary<char, IDictionary<char, double>>>(transJson);
 
-            var emitJson = ConfigManager.OpenProbEmitFile().ReadAllTextThenDispose();
+            var emitJson = ConfigManager.ReadProbEmitFile(x => x.ReadAllText());
             _emitProbs = JsonConvert.DeserializeObject<IDictionary<char, IDictionary<char, double>>>(emitJson);
 
             stopWatch.Stop();

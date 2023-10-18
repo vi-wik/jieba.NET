@@ -1,28 +1,33 @@
+using System;
 using System.IO;
+using System.Reflection;
 
 namespace JiebaNet.Segmenter
 {
     public class ConfigManager
     {
-        public static Stream OpenMainDictFile() => OpenFile("dict.txt");
+        public static T ReadMainDictFile<T>(Func<Stream, T> read) => ReadFile("dict.txt", read);
 
-        public static Stream OpenProbTransFile() => OpenFile("prob_trans.json");
+        public static T ReadProbTransFile<T>(Func<Stream, T> read) => ReadFile("prob_trans.json", read);
 
-        public static Stream OpenProbEmitFile() => OpenFile("prob_emit.json");
+        public static T ReadProbEmitFile<T>(Func<Stream, T> read) => ReadFile("prob_emit.json", read);
 
-        public static Stream OpenPosProbStartFile() => OpenFile("pos_prob_start.json");
+        public static T ReadPosProbStartFile<T>(Func<Stream, T> read) => ReadFile("pos_prob_start.json", read);
 
-        public static Stream OpenPosProbTransFile() => OpenFile("pos_prob_trans.json");
+        public static T ReadPosProbTransFile<T>(Func<Stream, T> read) => ReadFile("pos_prob_trans.json", read);
 
-        public static Stream OpenPosProbEmitFile() => OpenFile("pos_prob_emit.json");
+        public static T ReadPosProbEmitFile<T>(Func<Stream, T> read) => ReadFile("pos_prob_emit.json", read);
 
-        public static Stream OpenCharStateTabFile() => OpenFile("char_state_tab.json");
+        public static T ReadCharStateTabFile<T>(Func<Stream, T> read) => ReadFile("char_state_tab.json", read);
 
-        public static Stream OpenIdfFile() => OpenFile("idf.txt");
+        public static T ReadIdfFile<T>(Func<Stream, T> read) => ReadFile("idf.txt", read);
 
-        public static Stream OpenStopWordsFile() => OpenFile("stopwords.txt");
+        public static T ReadStopWordsFile<T>(Func<Stream, T> read) => ReadFile("stopwords.txt", read);
 
-        private static Stream OpenFile(string name) => 
-            typeof(ConfigManager).Assembly.GetManifestResourceStream($"JiebaNet.Segmenter.Resources.{name}");
+        private static T ReadFile<T>(string name, Func<Stream, T> read)
+        {
+            using var stream = typeof(ConfigManager).Assembly.GetManifestResourceStream($"JiebaNet.Segmenter.Resources.{name}");
+            return read(stream);
+        }
     }
 }

@@ -39,34 +39,39 @@ namespace JiebaNet.Segmenter
                 var stopWatch = new Stopwatch();
                 stopWatch.Start();
 
-                using (var sr = new StreamReader(ConfigManager.OpenMainDictFile(), Encoding.UTF8))
+                ConfigManager.ReadMainDictFile(stream =>
                 {
-                    string line = null;
-                    while ((line = sr.ReadLine()) != null)
+                    using (var sr = new StreamReader(stream, Encoding.UTF8))
                     {
-                        var tokens = line.Split(' ');
-                        if (tokens.Length < 2)
+                        string line = null;
+                        while ((line = sr.ReadLine()) != null)
                         {
-                            Debug.Fail(string.Format("Invalid line: {0}", line));
-                            continue;
-                        }
-
-                        var word = tokens[0];
-                        var freq = int.Parse(tokens[1]);
-
-                        Trie[word] = freq;
-                        Total += freq;
-
-                        foreach (var ch in Enumerable.Range(0, word.Length))
-                        {
-                            var wfrag = word.Sub(0, ch + 1);
-                            if (!Trie.ContainsKey(wfrag))
+                            var tokens = line.Split(' ');
+                            if (tokens.Length < 2)
                             {
-                                Trie[wfrag] = 0;
+                                Debug.Fail(string.Format("Invalid line: {0}", line));
+                                continue;
+                            }
+
+                            var word = tokens[0];
+                            var freq = int.Parse(tokens[1]);
+
+                            Trie[word] = freq;
+                            Total += freq;
+
+                            foreach (var ch in Enumerable.Range(0, word.Length))
+                            {
+                                var wfrag = word.Sub(0, ch + 1);
+                                if (!Trie.ContainsKey(wfrag))
+                                {
+                                    Trie[wfrag] = 0;
+                                }
                             }
                         }
                     }
-                }
+
+                    return true;
+                });
 
                 stopWatch.Stop();
                 Debug.WriteLine("main dict load finished, time elapsed {0} ms", stopWatch.ElapsedMilliseconds);

@@ -64,16 +64,16 @@ namespace JiebaNet.Segmenter.PosSeg
 
         private static void LoadModel()
         {
-            var startJson = ConfigManager.OpenPosProbStartFile().ReadAllTextThenDispose();
+            var startJson = ConfigManager.ReadPosProbStartFile(x => x.ReadAllText());
             _startProbs = JsonConvert.DeserializeObject<IDictionary<string, double>>(startJson);
 
-            var transJson = ConfigManager.OpenPosProbTransFile().ReadAllTextThenDispose();
+            var transJson = ConfigManager.ReadPosProbTransFile(x => x.ReadAllText());
             _transProbs = JsonConvert.DeserializeObject<IDictionary<string, IDictionary<string, double>>>(transJson);
 
-            var emitJson = ConfigManager.OpenPosProbEmitFile().ReadAllTextThenDispose();
+            var emitJson = ConfigManager.ReadPosProbEmitFile(x => x.ReadAllText());
             _emitProbs = JsonConvert.DeserializeObject<IDictionary<string, IDictionary<char, double>>>(emitJson);
 
-            var tabJson = ConfigManager.OpenCharStateTabFile().ReadAllTextThenDispose();
+            var tabJson = ConfigManager.ReadCharStateTabFile(x => x.ReadAllText());
             _stateTab = JsonConvert.DeserializeObject<IDictionary<char, List<string>>>(tabJson);
         }
 

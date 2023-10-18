@@ -44,7 +44,7 @@ namespace JiebaNet.Segmenter.PosSeg
             try
             {
                 _wordTagTab = new Dictionary<string, string>();
-                var lines = ConfigManager.OpenMainDictFile().ReadAllLinesThenDispose();
+                var lines = ConfigManager.ReadMainDictFile(x => x.ReadAllLines());
                 foreach (var line in lines)
                 {
                     var tokens = line.Split(' ');

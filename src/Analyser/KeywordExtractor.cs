@@ -21,7 +21,7 @@ namespace JiebaNet.Analyser
 
             if (stopWordsStream != null)
             {
-                var lines = stopWordsStream.ReadAllLinesThenDispose();
+                var lines = stopWordsStream.ReadAllLines();
                 foreach (var line in lines)
                 {
                     StopWords.Add(line.Trim());
