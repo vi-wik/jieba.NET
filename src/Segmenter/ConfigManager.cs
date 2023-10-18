@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.IO.Compression;
 using System.Reflection;
 
 namespace JiebaNet.Segmenter
@@ -26,7 +27,9 @@ namespace JiebaNet.Segmenter
 
         private static T ReadFile<T>(string name, Func<Stream, T> read)
         {
-            using var stream = typeof(ConfigManager).Assembly.GetManifestResourceStream($"JiebaNet.Segmenter.Resources.{name}");
+            using var zipStream = typeof(ConfigManager).Assembly.GetManifestResourceStream("Resources.zip") ?? throw new InvalidOperationException("Missing Resources.zip.");
+            using var zipArchive = new ZipArchive(zipStream, ZipArchiveMode.Read);
+            using var stream = zipArchive.GetEntry(name)?.Open() ?? throw new InvalidOperationException($"Missing {name} from Resources.zip.");
             return read(stream);
         }
     }
