@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <AssemblyName>JiebaNet.Segmenter.Cli</AssemblyName>
     <RootNamespace>JiebaNet.Segmenter.Cli</RootNamespace>
     <Version>0.42.2</Version>
