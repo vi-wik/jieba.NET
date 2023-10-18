@@ -19,11 +19,11 @@
   </ItemGroup>
 
   <Target Name="BuildResourcesZip" BeforeTargets="BeforeBuild">
-    <ZipDirectory SourceDirectory="Resources" DestinationFile="obj\$(Configuration)\$(TargetFramework)\Resources.zip" Overwrite="true" />
+    <ZipDirectory SourceDirectory="Resources" DestinationFile="Resources.zip" Overwrite="true" />
   </Target>
 
   <ItemGroup>
-    <EmbeddedResource Include="obj\$(Configuration)\$(TargetFramework)\Resources.zip" LogicalName="Resources.zip" Visible="false" />
+    <EmbeddedResource Include="Resources.zip" LogicalName="Resources.zip" Visible="false" />
   </ItemGroup>
 
 </Project>
