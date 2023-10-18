@@ -4,13 +4,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <AssemblyName>JiebaNet.Segmenter.Tests</AssemblyName>
     <RootNamespace>JiebaNet.Segmenter.Tests</RootNamespace>
-    <DebugType>portable</DebugType>
-    <Version>0.42.2</Version>
     <Description>JiebaNet.Segmenter.Tests</Description>
-    <Company>andersc</Company>
-    <Authors>andersc</Authors>
-    <Copyright>Copyright © andersc 2020</Copyright>
-    <RepositoryUrl>https://github.com/anderscui/jieba.NET/</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

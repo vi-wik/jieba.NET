@@ -5,12 +5,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <AssemblyName>JiebaNet.Segmenter.Cli</AssemblyName>
     <RootNamespace>JiebaNet.Segmenter.Cli</RootNamespace>
-    <Version>0.42.2</Version>
     <Description>Console app for jieba.NET.</Description>
-    <Company>andersc</Company>
-    <Authors>andersc</Authors>
-    <Copyright>Copyright © andersc 2020</Copyright>
-    <RepositoryUrl>https://github.com/anderscui/jieba.NET/</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

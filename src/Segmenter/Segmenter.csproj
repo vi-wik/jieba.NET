@@ -3,13 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>JiebaNet.Segmenter</RootNamespace>
-    <AssemblyName>JiebaNet.Segmenter</AssemblyName>
-    <Version>0.42.2</Version>
-    <Description>JiebaNet.Segmenter.</Description>
-    <Company>andersc</Company>
-    <Authors>andersc</Authors>
-    <Copyright>Copyright © andersc 2020</Copyright>
-    <RepositoryUrl>https://github.com/anderscui/jieba.NET/</RepositoryUrl>
+    <AssemblyName>Faithlife.JiebaNet.Segmenter</AssemblyName>
+    <Description>Faithlife edition of JiebaNet.Segmenter.</Description>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
   
   <ItemGroup>
