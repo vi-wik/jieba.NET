@@ -1,5 +1,9 @@
 # Release Notes
 
+## 0.1.1
+
+* Fix exception thrown under .NET Framework.
+
 ## 0.1.0
 
 * Publish Segmenter and Analyzer as separate packages.
