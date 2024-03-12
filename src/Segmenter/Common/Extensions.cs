@@ -124,13 +124,13 @@ namespace JiebaNet.Segmenter.Common
 
         public static string ReadAllText(this Stream stream)
         {
-            using var sr = new StreamReader(stream, encoding: Encoding.UTF8, detectEncodingFromByteOrderMarks: true, bufferSize: -1, leaveOpen: true);
+            using var sr = new StreamReader(stream, encoding: Encoding.UTF8, detectEncodingFromByteOrderMarks: true, bufferSize: 4096, leaveOpen: true);
             return sr.ReadToEnd();
         }
 
         public static string[] ReadAllLines(this Stream stream)
         {
-            using var sr = new StreamReader(stream, encoding: Encoding.UTF8, detectEncodingFromByteOrderMarks: true, bufferSize: -1, leaveOpen: true);
+            using var sr = new StreamReader(stream, encoding: Encoding.UTF8, detectEncodingFromByteOrderMarks: true, bufferSize: 4096, leaveOpen: true);
 
             var lines = new List<string>();
             while (true)

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFrameworks>net7.0;net472</TargetFrameworks>
     <AssemblyName>JiebaNet.Segmenter.Tests</AssemblyName>
     <RootNamespace>JiebaNet.Segmenter.Tests</RootNamespace>
     <Description>JiebaNet.Segmenter.Tests</Description>
