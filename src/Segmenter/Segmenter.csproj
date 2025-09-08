@@ -3,9 +3,17 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>JiebaNet.Segmenter</RootNamespace>
-    <AssemblyName>Faithlife.JiebaNet.Segmenter</AssemblyName>
-    <Description>Faithlife edition of JiebaNet.Segmenter.</Description>
+    <AssemblyName>viwik.JiebaNet.Segmenter</AssemblyName>
+    <Description>viwik edition of JiebaNet.Segmenter.</Description>
     <IsPackable>true</IsPackable>
+    <PackageId>$(AssemblyName)</PackageId>
+    <Authors>andersc, Faithlife，viwik</Authors>
+    <PackageProjectUrl>https://github.com/vi-wik/jieba.NET</PackageProjectUrl>
+    <RepositoryUrl />
+    <PackageReleaseNotes />
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
+    <Version>1.0.0</Version>
   </PropertyGroup>
   
   <ItemGroup>

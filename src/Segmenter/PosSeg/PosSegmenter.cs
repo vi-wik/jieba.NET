@@ -34,6 +34,8 @@ namespace JiebaNet.Segmenter.PosSeg
 
         private static IDictionary<string, string> _wordTagTab;
 
+        public JiebaSegmenter Segmenter => this._segmenter;
+
         static PosSegmenter()
         {
             LoadWordTagTab();
